@@ -1,6 +1,15 @@
+import WelcomeBot from "@/components/WelcomeBot";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Home, TrendingUp, Users, MessageSquare, CheckCircle2 } from "lucide-react";
+import {
+  ArrowRight,
+  Home,
+  TrendingUp,
+  Users,
+  MessageSquare,
+  CheckCircle2,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import heroImage from "@/assets/hero-home.jpg";
@@ -17,27 +26,31 @@ const Landing = () => {
     {
       icon: Home,
       title: "Property Onboarding",
-      description: "Guide your property details through our smart step-by-step process",
-      id: "onboarding"
+      description:
+        "Guide your property details through our smart step-by-step process",
+      id: "onboarding",
     },
     {
       icon: TrendingUp,
       title: "ROI Predictions",
-      description: "Data-driven insights showing potential value uplift for each improvement",
-      id: "roi"
+      description:
+        "Data-driven insights showing potential value uplift for each improvement",
+      id: "roi",
     },
     {
       icon: Users,
       title: "Contractor Network",
-      description: "Connect with verified local contractors filtered by specialty and rating",
-      id: "contractors"
+      description:
+        "Connect with verified local contractors filtered by specialty and rating",
+      id: "contractors",
     },
     {
       icon: MessageSquare,
       title: "AI Expert Chat",
-      description: "Get instant answers and smart suggestions from our AI-powered assistant",
-      id: "chat"
-    }
+      description:
+        "Get instant answers and smart suggestions from our AI-powered assistant",
+      id: "chat",
+    },
   ];
 
   const benefits = [
@@ -45,11 +58,11 @@ const Landing = () => {
     "Track projects with timeline & budget",
     "Transparent ROI calculations",
     "Verified contractor directory",
-    "AI-powered planning assistance"
+    "AI-powered planning assistance",
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -81,20 +94,21 @@ const Landing = () => {
                 Start Here
               </h1>
               <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                AI-powered planning with ROI predictions, personalized recommendations, 
-                and verified contractor connections. Transform your property with confidence.
+                AI-powered planning with ROI predictions, personalized
+                recommendations, and verified contractor connections. Transform
+                your property with confidence.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button 
-                  size="xl" 
+                <Button
+                  size="xl"
                   variant="hero"
                   onClick={() => navigate("/onboarding")}
                 >
                   Start Your Journey
                   <ArrowRight className="w-5 h-5" />
                 </Button>
-                <Button 
-                  size="xl" 
+                <Button
+                  size="xl"
                   variant="outline"
                   onClick={() => navigate("/auth")}
                 >
@@ -103,8 +117,8 @@ const Landing = () => {
               </div>
             </div>
             <div className="animate-slide-up">
-              <img 
-                src={heroImage} 
+              <img
+                src={heroImage}
                 alt="Beautiful renovated home showcasing quality improvements"
                 className="rounded-2xl shadow-2xl w-full h-auto object-cover"
               />
@@ -126,8 +140,8 @@ const Landing = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
-              <Card 
-                key={index} 
+              <Card
+                key={feature.id}
                 className="p-6 hover-lift bg-card border-border cursor-pointer transition-all hover:shadow-lg hover:border-primary"
                 style={{ animationDelay: `${index * 0.1}s` }}
                 onClick={() => setOpenModal(feature.id)}
@@ -136,9 +150,7 @@ const Landing = () => {
                 <h3 className="text-xl font-semibold text-card-foreground mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground">
-                  {feature.description}
-                </p>
+                <p className="text-muted-foreground">{feature.description}</p>
               </Card>
             ))}
           </div>
@@ -154,8 +166,8 @@ const Landing = () => {
             </h2>
             <div className="space-y-4">
               {benefits.map((benefit, index) => (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className="flex items-center gap-4 p-4 rounded-lg bg-secondary/50 animate-fade-in"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
@@ -175,10 +187,11 @@ const Landing = () => {
             Ready to Transform Your Home?
           </h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Join thousands of homeowners making smarter improvement decisions with AI-powered insights
+            Join thousands of homeowners making smarter improvement decisions
+            with AI-powered insights
           </p>
-          <Button 
-            size="xl" 
+          <Button
+            size="xl"
             variant="accent"
             onClick={() => navigate("/onboarding")}
           >
@@ -195,22 +208,25 @@ const Landing = () => {
         </div>
       </footer>
 
+      {/* Welcome bot floating bubble */}
+      <WelcomeBot />
+
       {/* Modals */}
-      <PropertyOnboardingModal 
-        isOpen={openModal === "onboarding"} 
-        onClose={() => setOpenModal(null)} 
+      <PropertyOnboardingModal
+        isOpen={openModal === "onboarding"}
+        onClose={() => setOpenModal(null)}
       />
-      <ROIPredictionsModal 
-        isOpen={openModal === "roi"} 
-        onClose={() => setOpenModal(null)} 
+      <ROIPredictionsModal
+        isOpen={openModal === "roi"}
+        onClose={() => setOpenModal(null)}
       />
-      <ContractorNetworkModal 
-        isOpen={openModal === "contractors"} 
-        onClose={() => setOpenModal(null)} 
+      <ContractorNetworkModal
+        isOpen={openModal === "contractors"}
+        onClose={() => setOpenModal(null)}
       />
-      <AIExpertChatModal 
-        isOpen={openModal === "chat"} 
-        onClose={() => setOpenModal(null)} 
+      <AIExpertChatModal
+        isOpen={openModal === "chat"}
+        onClose={() => setOpenModal(null)}
       />
     </div>
   );
