@@ -7,39 +7,51 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Home, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/context/AuthContext";
 
 const Auth = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { signIn, signUp } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("signup-email") as string;
+
     setIsLoading(true);
-    
+
     // Simulate authentication
     setTimeout(() => {
+      signUp(email);
       toast({
         title: "Account created!",
-        description: "Welcome to HomeImprove AI",
+        description: "Welcome to Niwaas",
       });
       setIsLoading(false);
-      navigate("/dashboard");
+      // Use replace to prevent back button from going back to auth page
+      navigate("/dashboard", { replace: true });
     }, 1500);
   };
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("signin-email") as string;
+
     setIsLoading(true);
-    
+
     // Simulate authentication
     setTimeout(() => {
+      signIn(email);
       toast({
         title: "Welcome back!",
         description: "Successfully signed in",
       });
       setIsLoading(false);
-      navigate("/dashboard");
+      // Use replace to prevent back button from going back to auth page
+      navigate("/dashboard", { replace: true });
     }, 1500);
   };
 
@@ -80,6 +92,7 @@ const Auth = () => {
                     <Label htmlFor="signin-email">Email</Label>
                     <Input
                       id="signin-email"
+                      name="signin-email"
                       type="email"
                       placeholder="you@example.com"
                       required
@@ -89,6 +102,7 @@ const Auth = () => {
                     <Label htmlFor="signin-password">Password</Label>
                     <Input
                       id="signin-password"
+                      name="signin-password"
                       type="password"
                       placeholder="••••••••"
                       required
@@ -111,6 +125,7 @@ const Auth = () => {
                     <Label htmlFor="signup-name">Full Name</Label>
                     <Input
                       id="signup-name"
+                      name="signup-name"
                       type="text"
                       placeholder="John Doe"
                       required
@@ -120,6 +135,7 @@ const Auth = () => {
                     <Label htmlFor="signup-email">Email</Label>
                     <Input
                       id="signup-email"
+                      name="signup-email"
                       type="email"
                       placeholder="you@example.com"
                       required
@@ -129,6 +145,7 @@ const Auth = () => {
                     <Label htmlFor="signup-password">Password</Label>
                     <Input
                       id="signup-password"
+                      name="signup-password"
                       type="password"
                       placeholder="••••••••"
                       required

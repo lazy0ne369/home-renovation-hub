@@ -9,10 +9,18 @@ import {
   Users,
   MessageSquare,
   CheckCircle2,
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Mail,
+  Phone,
+  LogOut,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import heroImage from "@/assets/hero-home.jpg";
+import { useAuth } from "@/context/AuthContext";
 import PropertyOnboardingModal from "@/components/PropertyOnboardingModal";
 import ROIPredictionsModal from "@/components/ROIPredictionsModal";
 import ContractorNetworkModal from "@/components/ContractorNetworkModal";
@@ -20,6 +28,7 @@ import AIExpertChatModal from "@/components/AIExpertChatModal";
 
 const Landing = () => {
   const navigate = useNavigate();
+  const { isAuthenticated, user, signOut } = useAuth();
   const [openModal, setOpenModal] = useState<string | null>(null);
 
   const features = [
@@ -70,13 +79,33 @@ const Landing = () => {
             <Home className="w-6 h-6 text-primary" />
             <span className="text-xl font-bold text-foreground">Niwaas</span>
           </div>
-          <div className="flex gap-3">
-            <Button variant="ghost" onClick={() => navigate("/auth")}>
-              Sign In
-            </Button>
-            <Button variant="hero" onClick={() => navigate("/auth")}>
-              Get Started
-            </Button>
+          <div className="flex gap-3 items-center">
+            {isAuthenticated ? (
+              <>
+                <span className="text-sm text-muted-foreground">{user}</span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    signOut();
+                    navigate("/");
+                  }}
+                  className="flex items-center gap-2"
+                >
+                  <LogOut className="w-4 h-4" />
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button variant="ghost" onClick={() => navigate("/auth")}>
+                  Sign In
+                </Button>
+                <Button variant="hero" onClick={() => navigate("/auth")}>
+                  Get Started
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </nav>
@@ -202,9 +231,229 @@ const Landing = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 border-t border-border">
-        <div className="container mx-auto text-center text-muted-foreground">
-          <p>&copy; 2025 Niwaas. All rights reserved.</p>
+      <footer className="py-16 px-4 bg-secondary/50 border-t border-border">
+        <div className="container mx-auto">
+          {/* Footer Content Grid */}
+          <div className="grid md:grid-cols-4 gap-8 mb-12">
+            {/* Brand Column */}
+            <div className="md:col-span-1">
+              <div className="flex items-center gap-2 mb-4">
+                <Home className="w-6 h-6 text-primary" />
+                <span className="text-lg font-bold text-black">Niwaas</span>
+              </div>
+              <p className="text-sm text-black leading-relaxed mb-4">
+                Smart home improvements powered by AI. Make confident renovation
+                decisions with data-driven insights.
+              </p>
+              {/* Social Links */}
+              <div className="flex gap-3 mt-6">
+                <a
+                  href="#"
+                  className="p-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors text-primary"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="w-4 h-4" />
+                </a>
+                <a
+                  href="#"
+                  className="p-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors text-primary"
+                  aria-label="Twitter"
+                >
+                  <Twitter className="w-4 h-4" />
+                </a>
+                <a
+                  href="#"
+                  className="p-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors text-primary"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="w-4 h-4" />
+                </a>
+                <a
+                  href="#"
+                  className="p-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors text-primary"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+
+            {/* Product Column */}
+            <div>
+              <h4 className="text-sm font-semibold text-black mb-4">
+                Product
+              </h4>
+              <ul className="space-y-2">
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-black hover:text-primary transition-colors"
+                  >
+                    Features
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-black hover:text-primary transition-colors"
+                  >
+                    Pricing
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-black hover:text-primary transition-colors"
+                  >
+                    ROI Calculator
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-black hover:text-primary transition-colors"
+                  >
+                    Contractors
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-black hover:text-primary transition-colors"
+                  >
+                    AI Assistant
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Company Column */}
+            <div>
+              <h4 className="text-sm font-semibold text-black mb-4">
+                Company
+              </h4>
+              <ul className="space-y-2">
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-black hover:text-primary transition-colors"
+                  >
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-black hover:text-primary transition-colors"
+                  >
+                    Blog
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-black hover:text-primary transition-colors"
+                  >
+                    Careers
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-black hover:text-primary transition-colors"
+                  >
+                    Press
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-black hover:text-primary transition-colors"
+                  >
+                    Contact
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Support Column */}
+            <div>
+              <h4 className="text-sm font-semibold text-black mb-4">
+                Support
+              </h4>
+              <ul className="space-y-3">
+                <li className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-primary" />
+                  <a
+                    href="mailto:support@niwaas.com"
+                    className="text-sm text-black hover:text-primary transition-colors"
+                  >
+                    support@niwaas.com
+                  </a>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-primary" />
+                  <a
+                    href="tel:+1234567890"
+                    className="text-sm text-black hover:text-primary transition-colors"
+                  >
+                    +1 (234) 567-8900
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-black hover:text-primary transition-colors"
+                  >
+                    Help Center
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-black hover:text-primary transition-colors"
+                  >
+                    Documentation
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-black hover:text-primary transition-colors"
+                  >
+                    FAQ
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Footer Bottom */}
+          <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-black">
+              &copy; 2025 Niwaas. All rights reserved.
+            </p>
+            <div className="flex gap-6">
+              <a
+                href="#"
+                className="text-sm text-black hover:text-primary transition-colors"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="#"
+                className="text-sm text-black hover:text-primary transition-colors"
+              >
+                Terms of Service
+              </a>
+              <a
+                href="#"
+                className="text-sm text-black hover:text-primary transition-colors"
+              >
+                Cookie Policy
+              </a>
+            </div>
+          </div>
         </div>
       </footer>
 
