@@ -62,7 +62,7 @@ const Auth = () => {
                 <Home className="w-6 h-6 text-primary" />
               </div>
             </div>
-            <CardTitle className="text-2xl">Welcome to HomeImprove AI</CardTitle>
+            <CardTitle className="text-2xl">Welcome to Niwaas</CardTitle>
             <CardDescription>
               Start planning your home improvements with AI-powered insights
             </CardDescription>

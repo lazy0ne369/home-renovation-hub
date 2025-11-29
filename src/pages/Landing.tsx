@@ -45,7 +45,7 @@ const Landing = () => {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Home className="w-6 h-6 text-primary" />
-            <span className="text-xl font-bold text-foreground">HomeImprove AI</span>
+            <span className="text-xl font-bold text-foreground">Niwaas</span>
           </div>
           <div className="flex gap-3">
             <Button variant="ghost" onClick={() => navigate("/auth")}>
@@ -139,7 +139,7 @@ const Landing = () => {
         <div className="container mx-auto">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-4xl font-bold text-foreground text-center mb-12">
-              Why Choose HomeImprove AI?
+              Why Choose Niwaas?
             </h2>
             <div className="space-y-4">
               {benefits.map((benefit, index) => (
@@ -180,7 +180,7 @@ const Landing = () => {
       {/* Footer */}
       <footer className="py-8 px-4 border-t border-border">
         <div className="container mx-auto text-center text-muted-foreground">
-          <p>&copy; 2025 HomeImprove AI. All rights reserved.</p>
+          <p>&copy; 2025 Niwaas. All rights reserved.</p>
         </div>
       </footer>
     </div>
