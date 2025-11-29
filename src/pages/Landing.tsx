@@ -2,31 +2,41 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, Home, TrendingUp, Users, MessageSquare, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import heroImage from "@/assets/hero-home.jpg";
+import PropertyOnboardingModal from "@/components/PropertyOnboardingModal";
+import ROIPredictionsModal from "@/components/ROIPredictionsModal";
+import ContractorNetworkModal from "@/components/ContractorNetworkModal";
+import AIExpertChatModal from "@/components/AIExpertChatModal";
 
 const Landing = () => {
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState<string | null>(null);
 
   const features = [
     {
       icon: Home,
       title: "Property Onboarding",
-      description: "Guide your property details through our smart step-by-step process"
+      description: "Guide your property details through our smart step-by-step process",
+      id: "onboarding"
     },
     {
       icon: TrendingUp,
       title: "ROI Predictions",
-      description: "Data-driven insights showing potential value uplift for each improvement"
+      description: "Data-driven insights showing potential value uplift for each improvement",
+      id: "roi"
     },
     {
       icon: Users,
       title: "Contractor Network",
-      description: "Connect with verified local contractors filtered by specialty and rating"
+      description: "Connect with verified local contractors filtered by specialty and rating",
+      id: "contractors"
     },
     {
       icon: MessageSquare,
       title: "AI Expert Chat",
-      description: "Get instant answers and smart suggestions from our AI-powered assistant"
+      description: "Get instant answers and smart suggestions from our AI-powered assistant",
+      id: "chat"
     }
   ];
 
@@ -118,8 +128,9 @@ const Landing = () => {
             {features.map((feature, index) => (
               <Card 
                 key={index} 
-                className="p-6 hover-lift bg-card border-border"
+                className="p-6 hover-lift bg-card border-border cursor-pointer transition-all hover:shadow-lg hover:border-primary"
                 style={{ animationDelay: `${index * 0.1}s` }}
+                onClick={() => setOpenModal(feature.id)}
               >
                 <feature.icon className="w-12 h-12 text-primary mb-4" />
                 <h3 className="text-xl font-semibold text-card-foreground mb-3">
@@ -183,6 +194,24 @@ const Landing = () => {
           <p>&copy; 2025 Niwaas. All rights reserved.</p>
         </div>
       </footer>
+
+      {/* Modals */}
+      <PropertyOnboardingModal 
+        isOpen={openModal === "onboarding"} 
+        onClose={() => setOpenModal(null)} 
+      />
+      <ROIPredictionsModal 
+        isOpen={openModal === "roi"} 
+        onClose={() => setOpenModal(null)} 
+      />
+      <ContractorNetworkModal 
+        isOpen={openModal === "contractors"} 
+        onClose={() => setOpenModal(null)} 
+      />
+      <AIExpertChatModal 
+        isOpen={openModal === "chat"} 
+        onClose={() => setOpenModal(null)} 
+      />
     </div>
   );
 };

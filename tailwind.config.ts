@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss";
+// @ts-expect-error - tailwindcss-animate has no TypeScript definitions
+import tailwindAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -91,5 +93,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindAnimate],
 } satisfies Config;
